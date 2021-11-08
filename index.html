@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DOM</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			border: 0;
+			background: #d8eef6;
+		}
+		header{
+			position: fixed;
+			margin-top: 0px;
+            padding-top: 0px;
+			background: #ffcccc;
+			border-bottom: ridge 10px ;
+			top:0;
+			width: 100%;
+		}
+		#left{
+			float:left;
+	    	width:25%;
+		}
+		#right{
+			float: right;
+			width: 10%;
+		}
+		h1{
+			background-color: #ffb36d;
+		}
+		h2{
+			font-size: 35px;
+		}
+		#calculator, #shape,#multipleevents,#colorpicker,#agecalc{
+			margin-left: 40%;
+			margin-right: 40%;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<header>
+		<center>
+			<h2>DOCUMENT OBJECT MODEL</h2>
+			<h3>S.THARUN-19MID0031</h3>
+		</center>
+	</header>
+	<center>
+		<br><br><br><br><br><br><br><br><br><br>
+		<div id="calculator">
+			<h1>CALCULATOR</h1>
+			<p align="left">Enter two numbers first and then select the operation</p>
+			<div id="left">
+				<input type="number" id="num1" placeholder="num1"><br><br>
+				<input type="number" id="num2" placeholder="num2"><br><br>
+				<div id="result"></div>
+			</div>
+			<div id="right">
+				<button id="add">+</button><br>
+				<button id="sub">-</button><br>
+				<button id="mul">*</button><br>
+				<button id="div">/</button><br>
+			</div>
+		</div>
+	</center>
+	<script type="text/javascript">
+		
+		function addition(){
+			var n1 = Number(document.getElementById("num1").value);
+			var n2 = Number(document.getElementById("num2").value);
+			document.getElementById("result").innerHTML = "RESULT : "+n1+"+"+n2+"="+(n1+n2);
+		}
+		function subtraction(){
+			var n1 = Number(document.getElementById("num1").value);
+			var n2 = Number(document.getElementById("num2").value);
+			document.getElementById("result").innerHTML = "RESULT : "+n1+"-"+n2+"="+(n1-n2);
+		}
+		function multiplication(){
+			var n1 = Number(document.getElementById("num1").value);
+			var n2 = Number(document.getElementById("num2").value);
+			document.getElementById("result").innerHTML = "RESULT : "+n1+"x"+n2+"="+(n1*n2);
+		}
+		function division(){
+			var n1 = Number(document.getElementById("num1").value);
+			var n2 = Number(document.getElementById("num2").value);
+			document.getElementById("result").innerHTML = "RESULT : "+n1+"/"+n2+"="+(n1/n2);
+		}
+
+		var addbtn = document.getElementById("add");
+		var subbtn = document.getElementById("sub");
+		var mulbtn = document.getElementById("mul");
+		var divbtn = document.getElementById("div");
+
+		addbtn.addEventListener("click",addition);
+		subbtn.addEventListener("click",subtraction);
+		mulbtn.addEventListener("click",multiplication);
+		divbtn.addEventListener("click",division);
+	</script>
+
+	<br><br><br><br><br><br>
+	<div id="agecalc">
+		<center><h1>AGE</h1><br></center>
+		<input type="date" name="date" id="datefield">
+		<button id="getAge">Get Age</button><br><br>
+		<div id="Age"></div><br><br>
+	</div>
+	<script type="text/javascript">
+
+		function getAge(){
+
+			var date = document.getElementById("datefield").value;
+			var year = Number(date.slice(0,4));
+			var month = Number(date.slice(5,7));
+			var day = Number(date.slice(8,10));
+
+			var todaydate = new Date();
+			var todayyear = todaydate.getFullYear();
+			var todaymonth = (todaydate.getMonth())+1;
+			var todayday = todaydate.getDate();
+
+			age = todayyear - year - 1;
+			if(todaymonth-month>-1 && todayday-day>-1){
+				age=age+1;
+			}
+			document.getElementById("Age").innerHTML = (age+1);
+		}
+		var btn = document.getElementById("getAge");
+		btn.addEventListener("click",getAge);
+	</script>
+
+	<div id="shape">
+		<center><h1>SHAPES</h1><br></center>
+		<button id="rectangle">Rectangle</button>&emsp;
+		<button id="square">Square</button><br><br>
+		<button id="triangle">Triangle</button>&emsp;&emsp;
+		<button id="circle">Circle</button>&emsp;<br><br>
+		<div id="shapes">
+			<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #d8eef6;'/></svg>
+		</div>
+		<script type="text/javascript">
+			var rbtn = document.getElementById("rectangle");
+			var sbtn = document.getElementById("square");
+			var tbtn = document.getElementById("triangle");
+			var cbtn = document.getElementById("circle");
+
+			rbtn.addEventListener("mouseover",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <rect width='200' height='100' style='stroke: none; fill: #ff0000;'/></svg>";
+			});
+			rbtn.addEventListener("mouseout",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #d8eef6;'/></svg>";
+			});
+
+			sbtn.addEventListener("mouseover",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <rect width='100' height='100' style='stroke: none; fill: #ff0000;'/></svg>";
+			});
+			sbtn.addEventListener("mouseout",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #d8eef6;'/></svg>";
+			});
+
+			tbtn.addEventListener("mouseover",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <polygon points='50,0 140,190 -40,190' style='stroke: none; fill: #ff0000;'/></svg>";
+			});
+			tbtn.addEventListener("mouseout",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #d8eef6;'/></svg>";
+			});
+
+			cbtn.addEventListener("mouseover",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #ff0000;'/></svg>";
+			});
+			cbtn.addEventListener("mouseout",()=>{
+				document.getElementById("shapes").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #d8eef6;'/></svg>";
+			});
+		</script>
+	</div>
+
+	<div id="multipleevents">
+		<center><h1>MULTIPLE MOUSE EVENTS</h1></center>
+		<p><b><u>Click</u></b>, <b><u>Mouseenter</u></b> and <b><u>Mouseleave</u></b> are used. Check with the button to see difference in color of the shape<br><br>
+		<button id="rectangle1">Rectangle</button>&emsp;<br><br>
+		<div id="shapes1">
+			<svg width='500' height='100'> <rect id='s' width='200' height='100' style='stroke: none; fill: #d8eef6;'/></svg>
+		</div>
+		<script type="text/javascript">
+			var rbtn1 = document.getElementById("rectangle1");
+			$("#rectangle1").on({
+				mouseenter:function(){
+					$("#s").css("fill","#ff0000");
+				},
+				mouseleave:function(){
+					$("#s").css("fill","#5900ff");
+				},
+				click:function(){
+					$("#s").css("fill","#00ff11");
+				}
+			})
+		</script>
+	</div>
+
+	<div id="colorpicker">
+		<center><h1>COLOUR PICKER</h1></center><br><br>
+		<input type="color" id="colour"> Select this colour palette<br><br>
+		<button id="change">Change color</button><br><br>
+		<div id="shapes2">
+			<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill: #C9A1A1;'/></svg>
+		</div>
+		<script type="text/javascript">
+			var chbtn = document.getElementById("change");
+			chbtn.addEventListener("click",()=>{
+				var x = document.getElementById("colour").value;
+				document.getElementById("shapes2").innerHTML = "<svg width='500' height='100'> <circle cx='50' cy='50' r='50' style='stroke: none; fill:" + x +";'/></svg>";
+			})
+		</script>
+	</div><br><br>
+</body>
+</html>
